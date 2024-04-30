@@ -27,7 +27,7 @@ function Section1(){
     <Wrapper>
         <p className=' text-2xl '>Run your agency, in one place</p>
         <div className='bg-gradient-to-r from-primary to-secondary-foreground text-transparent bg-clip-text relative'>
-            <h1 className='sm:text-[1rem] md:text-[200px] text-9xl font-semibold text-center'>Solaris</h1>
+            <h1 className='sm:text-[1rem] md:text-[200px] text-9xl font-semibold text-center'>Plura</h1>
         </div>
         <div className=' z-20 relative'>
             <div className='w-full rounded-full bg-primary/50 h-32 blur-[120px] absolute -z-10 '/>

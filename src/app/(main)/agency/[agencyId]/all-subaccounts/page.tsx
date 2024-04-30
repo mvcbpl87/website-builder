@@ -24,6 +24,7 @@ import Link from 'next/link'
 import { CreateSubAccountButton } from './_components/create-subAccount'
 import { GetSubAccountCredentials } from '@/lib/drizzle/queries/subaccounts'
 import { SubAccountType } from '@/lib/types'
+import { AvatarTemplate } from '@/components/global/avatar-template'
 type Props = {
   params: {agencyId: string}
 }
@@ -49,7 +50,11 @@ export default async function Page({params}:Props){
               rounded-lg hover:!bg-background cursor-pointer transition-all"
              >
                 <Link href={`/subaccount/${account.id}`} className="flex gap-4 w-full h-full">
-                <div className="relative w-24 h-24">
+                <div className="relative w-24 h-24 p-2">
+                  <div className='w-full h-full rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 flex justify-center items-center text-3xl'>
+                    {account.name.slice(0,2).toUpperCase()}
+                  </div>
+    
                     {/* <Image
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         fill

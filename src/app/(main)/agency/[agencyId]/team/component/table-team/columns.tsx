@@ -49,7 +49,10 @@ export const columns: ColumnDef<TUser>[] = [
       const name = row.getValue('name') as string;
       return(
       <div className="flex items-center gap-4">
-        <AvatarTemplate source={avatarUrl} name={name}/>
+        <div className="h-8 w-8 flex items-center">
+          <AvatarTemplate source={avatarUrl} name={name}/>
+        </div>
+       
         <span>{name}</span>
       </div>
       )
@@ -68,9 +71,8 @@ export const columns: ColumnDef<TUser>[] = [
     header:'Owned Accounts',
     cell: ({row}) =>{
       const isAgencyOwner = row.getValue('role') == UserRole.AGENCY_OWNER;
-      // const allSubAccounts = row.original.agency.subAccounts;
       if(isAgencyOwner) return <Badge className="whitespace-nowrap">Agency - {row.original?.name}</Badge>
-      return(<div>test</div>)
+      return(<div className="text-muted-foreground/80">No access</div>)
     }
   },
   {

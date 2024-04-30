@@ -195,7 +195,7 @@ export default function UserDetails({userData, agencyId}:Props){
                 agency owners
             </FormDescription>
             <div className='flex items-center justify-between rounded-lg border p-4'>
-                <div>Test Subaccount here</div>
+                <div>User Permissions</div>
                 <Switch />
             </div>
         </div>)

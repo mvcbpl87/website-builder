@@ -8,6 +8,7 @@ import { Switch } from "@/components/ui/switch"
 import { ModeToggle } from "./mode-toggle"
 import { Bell, icons } from "lucide-react"
 import { Card } from "../ui/card"
+import { UserButton as ClerkButton } from "@clerk/nextjs"
 import {
     Avatar,
     AvatarFallback,
@@ -48,9 +49,13 @@ export default function InfoBar({
     }
 
     return(
-    <Wrapper className="bg-background/80 backdrop-blur-md p-4 flex justify-end gap-4">
-        <AvatarTemplate source="/avatars/2.png"/>
-        <InfoSheetLayout handleClick={handleClick} notifications={allNotifications}/>
+    <Wrapper className="bg-background/80 backdrop-blur-md p-4 flex items-center justify-end gap-4">
+        {/* <AvatarTemplate source="/avatars/2.png"/> */}
+        <div className="h-8 w-8  flex items-center justify-center">
+            <ClerkButton/>
+        </div>
+    
+        <InfoSheetLayout handleClick={handleClick} notifications={[]}/>
         <ModeToggle/>
     </Wrapper>)
       
