@@ -1,0 +1,2 @@
+## Form validation using zod
+npm install react-hook-form @hookform/resolvers/zod zod

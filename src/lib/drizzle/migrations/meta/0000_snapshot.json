@@ -1,0 +1,2885 @@
+{
+  "id": "73680a75-b24c-4670-9302-e4de4b9765a3",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "Action": {
+      "name": "Action",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ActionType": {
+          "name": "ActionType",
+          "type": "ActionType",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'CREATE_CONTACT'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "laneId": {
+          "name": "laneId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'0'"
+        },
+        "automationId": {
+          "name": "automationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Action_automationId_Automation_id_fk": {
+          "name": "Action_automationId_Automation_id_fk",
+          "tableFrom": "Action",
+          "tableTo": "Automation",
+          "columnsFrom": [
+            "automationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "AddOns": {
+      "name": "AddOns",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "priceId": {
+          "name": "priceId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agencyId": {
+          "name": "agencyId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "AddOns_agencyId_Agency_id_fk": {
+          "name": "AddOns_agencyId_Agency_id_fk",
+          "tableFrom": "AddOns",
+          "tableTo": "Agency",
+          "columnsFrom": [
+            "agencyId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "AddOns_priceId_unique": {
+          "name": "AddOns_priceId_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "priceId"
+          ]
+        }
+      }
+    },
+    "Agency": {
+      "name": "Agency",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "connectAccountId": {
+          "name": "connectAccountId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        },
+        "customerId": {
+          "name": "customerId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "agencyLogo": {
+          "name": "agencyLogo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "companyEmail": {
+          "name": "companyEmail",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "companyPhone": {
+          "name": "companyPhone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "whiteLabel": {
+          "name": "whiteLabel",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city": {
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "zipCode": {
+          "name": "zipCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "state": {
+          "name": "state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "goal": {
+          "name": "goal",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 5
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "AgencySidebarOption": {
+      "name": "AgencySidebarOption",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Menu'"
+        },
+        "link": {
+          "name": "link",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#'"
+        },
+        "Icon": {
+          "name": "Icon",
+          "type": "Icon",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'info'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agencyId": {
+          "name": "agencyId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "AgencySidebarOption_agencyId_Agency_id_fk": {
+          "name": "AgencySidebarOption_agencyId_Agency_id_fk",
+          "tableFrom": "AgencySidebarOption",
+          "tableTo": "Agency",
+          "columnsFrom": [
+            "agencyId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Automation": {
+      "name": "Automation",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "published": {
+          "name": "published",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "triggerId": {
+          "name": "triggerId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subAccountId": {
+          "name": "subAccountId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Automation_triggerId_Trigger_id_fk": {
+          "name": "Automation_triggerId_Trigger_id_fk",
+          "tableFrom": "Automation",
+          "tableTo": "Trigger",
+          "columnsFrom": [
+            "triggerId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "Automation_subAccountId_SubAccount_id_fk": {
+          "name": "Automation_subAccountId_SubAccount_id_fk",
+          "tableFrom": "Automation",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccountId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "AutomationInstance": {
+      "name": "AutomationInstance",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "automationId": {
+          "name": "automationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "AutomationInstance_automationId_Automation_id_fk": {
+          "name": "AutomationInstance_automationId_Automation_id_fk",
+          "tableFrom": "AutomationInstance",
+          "tableTo": "Automation",
+          "columnsFrom": [
+            "automationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "ClassName": {
+      "name": "ClassName",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "color": {
+          "name": "color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "customData": {
+          "name": "customData",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "funnelId": {
+          "name": "funnelId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ClassName_funnelId_Funnel_id_fk": {
+          "name": "ClassName_funnelId_Funnel_id_fk",
+          "tableFrom": "ClassName",
+          "tableTo": "Funnel",
+          "columnsFrom": [
+            "funnelId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Contact": {
+      "name": "Contact",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subAccountId": {
+          "name": "subAccountId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Contact_subAccountId_SubAccount_id_fk": {
+          "name": "Contact_subAccountId_SubAccount_id_fk",
+          "tableFrom": "Contact",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccountId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Funnel": {
+      "name": "Funnel",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "published": {
+          "name": "published",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "subDomainName": {
+          "name": "subDomainName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "favicon": {
+          "name": "favicon",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "liveProducts": {
+          "name": "liveProducts",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'[]'"
+        },
+        "subAccountId": {
+          "name": "subAccountId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Funnel_subAccountId_SubAccount_id_fk": {
+          "name": "Funnel_subAccountId_SubAccount_id_fk",
+          "tableFrom": "Funnel",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccountId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "Funnel_subDomainName_unique": {
+          "name": "Funnel_subDomainName_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "subDomainName"
+          ]
+        }
+      }
+    },
+    "FunnelPage": {
+      "name": "FunnelPage",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pathName": {
+          "name": "pathName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "visits": {
+          "name": "visits",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "previewImage": {
+          "name": "previewImage",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "funnelId": {
+          "name": "funnelId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "FunnelPage_funnelId_Funnel_id_fk": {
+          "name": "FunnelPage_funnelId_Funnel_id_fk",
+          "tableFrom": "FunnelPage",
+          "tableTo": "Funnel",
+          "columnsFrom": [
+            "funnelId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Invitation": {
+      "name": "Invitation",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "InvitationStatus": {
+          "name": "InvitationStatus",
+          "type": "InvitationStatus",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Pending'"
+        },
+        "Role": {
+          "name": "Role",
+          "type": "Role",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Subaccount_User'"
+        },
+        "agencyId": {
+          "name": "agencyId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Invitation_agencyId_Agency_id_fk": {
+          "name": "Invitation_agencyId_Agency_id_fk",
+          "tableFrom": "Invitation",
+          "tableTo": "Agency",
+          "columnsFrom": [
+            "agencyId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "Invitation_email_unique": {
+          "name": "Invitation_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    },
+    "Lane": {
+      "name": "Lane",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pipeId": {
+          "name": "pipeId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Lane_pipeId_Pipeline_id_fk": {
+          "name": "Lane_pipeId_Pipeline_id_fk",
+          "tableFrom": "Lane",
+          "tableTo": "Pipeline",
+          "columnsFrom": [
+            "pipeId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Media": {
+      "name": "Media",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "link": {
+          "name": "link",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subAccountId": {
+          "name": "subAccountId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Media_subAccountId_SubAccount_id_fk": {
+          "name": "Media_subAccountId_SubAccount_id_fk",
+          "tableFrom": "Media",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccountId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "Media_link_unique": {
+          "name": "Media_link_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "link"
+          ]
+        }
+      }
+    },
+    "Notification": {
+      "name": "Notification",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "notification": {
+          "name": "notification",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agencyId": {
+          "name": "agencyId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subAccountId": {
+          "name": "subAccountId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Notification_agencyId_Agency_id_fk": {
+          "name": "Notification_agencyId_Agency_id_fk",
+          "tableFrom": "Notification",
+          "tableTo": "Agency",
+          "columnsFrom": [
+            "agencyId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "Notification_userId_User_id_fk": {
+          "name": "Notification_userId_User_id_fk",
+          "tableFrom": "Notification",
+          "tableTo": "User",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "Notification_subAccountId_SubAccount_id_fk": {
+          "name": "Notification_subAccountId_SubAccount_id_fk",
+          "tableFrom": "Notification",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccountId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Permissions": {
+      "name": "Permissions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "access": {
+          "name": "access",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subAccountId": {
+          "name": "subAccountId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Permissions_userId_User_id_fk": {
+          "name": "Permissions_userId_User_id_fk",
+          "tableFrom": "Permissions",
+          "tableTo": "User",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "Permissions_subAccountId_SubAccount_id_fk": {
+          "name": "Permissions_subAccountId_SubAccount_id_fk",
+          "tableFrom": "Permissions",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccountId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Pipeline": {
+      "name": "Pipeline",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subAccount": {
+          "name": "subAccount",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Pipeline_subAccount_SubAccount_id_fk": {
+          "name": "Pipeline_subAccount_SubAccount_id_fk",
+          "tableFrom": "Pipeline",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccount"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "SubAccount": {
+      "name": "SubAccount",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "connectAccountId": {
+          "name": "connectAccountId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subAccountLogo": {
+          "name": "subAccountLogo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "companyEmail": {
+          "name": "companyEmail",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "companyPhone": {
+          "name": "companyPhone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "goal": {
+          "name": "goal",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 5
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city": {
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "zipCode": {
+          "name": "zipCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "state": {
+          "name": "state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agencyId": {
+          "name": "agencyId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "SubAccount_agencyId_Agency_id_fk": {
+          "name": "SubAccount_agencyId_Agency_id_fk",
+          "tableFrom": "SubAccount",
+          "tableTo": "Agency",
+          "columnsFrom": [
+            "agencyId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "SubAccountSidebarOption": {
+      "name": "SubAccountSidebarOption",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Menu'"
+        },
+        "link": {
+          "name": "link",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'#'"
+        },
+        "Icon": {
+          "name": "Icon",
+          "type": "Icon",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'info'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subAccountId": {
+          "name": "subAccountId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "SubAccountSidebarOption_subAccountId_SubAccount_id_fk": {
+          "name": "SubAccountSidebarOption_subAccountId_SubAccount_id_fk",
+          "tableFrom": "SubAccountSidebarOption",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccountId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Subscription": {
+      "name": "Subscription",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "plan": {
+          "name": "plan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "name": "price",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "priceId": {
+          "name": "priceId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "customerId": {
+          "name": "customerId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "currentPeriodEndDate": {
+          "name": "currentPeriodEndDate",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "SubscriptionId": {
+          "name": "SubscriptionId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agencyId": {
+          "name": "agencyId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Subscription_agencyId_Agency_id_fk": {
+          "name": "Subscription_agencyId_Agency_id_fk",
+          "tableFrom": "Subscription",
+          "tableTo": "Agency",
+          "columnsFrom": [
+            "agencyId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "Subscription_SubscriptionId_unique": {
+          "name": "Subscription_SubscriptionId_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "SubscriptionId"
+          ]
+        }
+      }
+    },
+    "Tag": {
+      "name": "Tag",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subAccount": {
+          "name": "subAccount",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Tag_subAccount_SubAccount_id_fk": {
+          "name": "Tag_subAccount_SubAccount_id_fk",
+          "tableFrom": "Tag",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccount"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Ticket": {
+      "name": "Ticket",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "value": {
+          "name": "value",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "laneId": {
+          "name": "laneId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customerId": {
+          "name": "customerId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "assignedUid": {
+          "name": "assignedUid",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Ticket_laneId_Lane_id_fk": {
+          "name": "Ticket_laneId_Lane_id_fk",
+          "tableFrom": "Ticket",
+          "tableTo": "Lane",
+          "columnsFrom": [
+            "laneId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "Ticket_customerId_Contact_id_fk": {
+          "name": "Ticket_customerId_Contact_id_fk",
+          "tableFrom": "Ticket",
+          "tableTo": "Contact",
+          "columnsFrom": [
+            "customerId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "Ticket_assignedUid_User_id_fk": {
+          "name": "Ticket_assignedUid_User_id_fk",
+          "tableFrom": "Ticket",
+          "tableTo": "User",
+          "columnsFrom": [
+            "assignedUid"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Trigger": {
+      "name": "Trigger",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "TriggerTypes": {
+          "name": "TriggerTypes",
+          "type": "TriggerTypes",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'CONTACT_FORM'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subAccountId": {
+          "name": "subAccountId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Trigger_subAccountId_SubAccount_id_fk": {
+          "name": "Trigger_subAccountId_SubAccount_id_fk",
+          "tableFrom": "Trigger",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccountId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "User": {
+      "name": "User",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "avatar_url": {
+          "name": "avatar_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Role": {
+          "name": "Role",
+          "type": "Role",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Subaccount_User'"
+        },
+        "agencyId": {
+          "name": "agencyId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "User_agencyId_Agency_id_fk": {
+          "name": "User_agencyId_Agency_id_fk",
+          "tableFrom": "User",
+          "tableTo": "Agency",
+          "columnsFrom": [
+            "agencyId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "_AgencyReference": {
+      "name": "_AgencyReference",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "agencyId": {
+          "name": "agencyId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subAccountId": {
+          "name": "subAccountId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sidebarOption": {
+          "name": "sidebarOption",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "invitationId": {
+          "name": "invitationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "notificationId": {
+          "name": "notificationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subscriptionId": {
+          "name": "subscriptionId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "addOnsId": {
+          "name": "addOnsId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_AgencyReference_agencyId_Agency_id_fk": {
+          "name": "_AgencyReference_agencyId_Agency_id_fk",
+          "tableFrom": "_AgencyReference",
+          "tableTo": "Agency",
+          "columnsFrom": [
+            "agencyId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_AgencyReference_userId_User_id_fk": {
+          "name": "_AgencyReference_userId_User_id_fk",
+          "tableFrom": "_AgencyReference",
+          "tableTo": "User",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_AgencyReference_subAccountId_SubAccount_id_fk": {
+          "name": "_AgencyReference_subAccountId_SubAccount_id_fk",
+          "tableFrom": "_AgencyReference",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccountId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_AgencyReference_sidebarOption_AgencySidebarOption_id_fk": {
+          "name": "_AgencyReference_sidebarOption_AgencySidebarOption_id_fk",
+          "tableFrom": "_AgencyReference",
+          "tableTo": "AgencySidebarOption",
+          "columnsFrom": [
+            "sidebarOption"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_AgencyReference_invitationId_Invitation_id_fk": {
+          "name": "_AgencyReference_invitationId_Invitation_id_fk",
+          "tableFrom": "_AgencyReference",
+          "tableTo": "Invitation",
+          "columnsFrom": [
+            "invitationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_AgencyReference_notificationId_Notification_id_fk": {
+          "name": "_AgencyReference_notificationId_Notification_id_fk",
+          "tableFrom": "_AgencyReference",
+          "tableTo": "Notification",
+          "columnsFrom": [
+            "notificationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_AgencyReference_subscriptionId_Subscription_id_fk": {
+          "name": "_AgencyReference_subscriptionId_Subscription_id_fk",
+          "tableFrom": "_AgencyReference",
+          "tableTo": "Subscription",
+          "columnsFrom": [
+            "subscriptionId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_AgencyReference_addOnsId_AddOns_id_fk": {
+          "name": "_AgencyReference_addOnsId_AddOns_id_fk",
+          "tableFrom": "_AgencyReference",
+          "tableTo": "AddOns",
+          "columnsFrom": [
+            "addOnsId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "_AutomationReference": {
+      "name": "_AutomationReference",
+      "schema": "",
+      "columns": {
+        "automationId": {
+          "name": "automationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "actionId": {
+          "name": "actionId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "autoInstanceId": {
+          "name": "autoInstanceId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_AutomationReference_automationId_Automation_id_fk": {
+          "name": "_AutomationReference_automationId_Automation_id_fk",
+          "tableFrom": "_AutomationReference",
+          "tableTo": "Automation",
+          "columnsFrom": [
+            "automationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_AutomationReference_actionId_Action_id_fk": {
+          "name": "_AutomationReference_actionId_Action_id_fk",
+          "tableFrom": "_AutomationReference",
+          "tableTo": "Action",
+          "columnsFrom": [
+            "actionId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_AutomationReference_autoInstanceId_AutomationInstance_id_fk": {
+          "name": "_AutomationReference_autoInstanceId_AutomationInstance_id_fk",
+          "tableFrom": "_AutomationReference",
+          "tableTo": "AutomationInstance",
+          "columnsFrom": [
+            "autoInstanceId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "_AutomationReference_automationId_actionId_autoInstanceId_pk": {
+          "name": "_AutomationReference_automationId_actionId_autoInstanceId_pk",
+          "columns": [
+            "automationId",
+            "actionId",
+            "autoInstanceId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "_ContactReference": {
+      "name": "_ContactReference",
+      "schema": "",
+      "columns": {
+        "contactId": {
+          "name": "contactId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ticketId": {
+          "name": "ticketId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_ContactReference_contactId_Contact_id_fk": {
+          "name": "_ContactReference_contactId_Contact_id_fk",
+          "tableFrom": "_ContactReference",
+          "tableTo": "Contact",
+          "columnsFrom": [
+            "contactId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_ContactReference_ticketId_Ticket_id_fk": {
+          "name": "_ContactReference_ticketId_Ticket_id_fk",
+          "tableFrom": "_ContactReference",
+          "tableTo": "Ticket",
+          "columnsFrom": [
+            "ticketId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "_ContactReference_contactId_ticketId_pk": {
+          "name": "_ContactReference_contactId_ticketId_pk",
+          "columns": [
+            "contactId",
+            "ticketId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "_FunnelReference": {
+      "name": "_FunnelReference",
+      "schema": "",
+      "columns": {
+        "funnelId": {
+          "name": "funnelId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "funnelPageId": {
+          "name": "funnelPageId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ClassNameId": {
+          "name": "ClassNameId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_FunnelReference_funnelId_Funnel_id_fk": {
+          "name": "_FunnelReference_funnelId_Funnel_id_fk",
+          "tableFrom": "_FunnelReference",
+          "tableTo": "Funnel",
+          "columnsFrom": [
+            "funnelId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_FunnelReference_funnelPageId_FunnelPage_id_fk": {
+          "name": "_FunnelReference_funnelPageId_FunnelPage_id_fk",
+          "tableFrom": "_FunnelReference",
+          "tableTo": "FunnelPage",
+          "columnsFrom": [
+            "funnelPageId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_FunnelReference_ClassNameId_ClassName_id_fk": {
+          "name": "_FunnelReference_ClassNameId_ClassName_id_fk",
+          "tableFrom": "_FunnelReference",
+          "tableTo": "ClassName",
+          "columnsFrom": [
+            "ClassNameId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "_FunnelReference_funnelId_funnelPageId_ClassNameId_pk": {
+          "name": "_FunnelReference_funnelId_funnelPageId_ClassNameId_pk",
+          "columns": [
+            "funnelId",
+            "funnelPageId",
+            "ClassNameId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "_LaneReference": {
+      "name": "_LaneReference",
+      "schema": "",
+      "columns": {
+        "laneId": {
+          "name": "laneId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ticketId": {
+          "name": "ticketId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_LaneReference_laneId_Lane_id_fk": {
+          "name": "_LaneReference_laneId_Lane_id_fk",
+          "tableFrom": "_LaneReference",
+          "tableTo": "Lane",
+          "columnsFrom": [
+            "laneId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_LaneReference_ticketId_Ticket_id_fk": {
+          "name": "_LaneReference_ticketId_Ticket_id_fk",
+          "tableFrom": "_LaneReference",
+          "tableTo": "Ticket",
+          "columnsFrom": [
+            "ticketId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "_LaneReference_laneId_ticketId_pk": {
+          "name": "_LaneReference_laneId_ticketId_pk",
+          "columns": [
+            "laneId",
+            "ticketId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "_PipelineReference": {
+      "name": "_PipelineReference",
+      "schema": "",
+      "columns": {
+        "pipeId": {
+          "name": "pipeId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "laneId": {
+          "name": "laneId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_PipelineReference_pipeId_Pipeline_id_fk": {
+          "name": "_PipelineReference_pipeId_Pipeline_id_fk",
+          "tableFrom": "_PipelineReference",
+          "tableTo": "Pipeline",
+          "columnsFrom": [
+            "pipeId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_PipelineReference_laneId_Lane_id_fk": {
+          "name": "_PipelineReference_laneId_Lane_id_fk",
+          "tableFrom": "_PipelineReference",
+          "tableTo": "Lane",
+          "columnsFrom": [
+            "laneId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "_PipelineReference_pipeId_laneId_pk": {
+          "name": "_PipelineReference_pipeId_laneId_pk",
+          "columns": [
+            "pipeId",
+            "laneId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "_SubAccountReference": {
+      "name": "_SubAccountReference",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "subAccountId": {
+          "name": "subAccountId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sidebarOption": {
+          "name": "sidebarOption",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "permissionsId": {
+          "name": "permissionsId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "funnelId": {
+          "name": "funnelId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mediaId": {
+          "name": "mediaId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contactId": {
+          "name": "contactId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "triggerId": {
+          "name": "triggerId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "automationId": {
+          "name": "automationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pipelineId": {
+          "name": "pipelineId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tagId": {
+          "name": "tagId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "notificationId": {
+          "name": "notificationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_SubAccountReference_subAccountId_SubAccount_id_fk": {
+          "name": "_SubAccountReference_subAccountId_SubAccount_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "SubAccount",
+          "columnsFrom": [
+            "subAccountId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_SubAccountReference_sidebarOption_SubAccountSidebarOption_id_fk": {
+          "name": "_SubAccountReference_sidebarOption_SubAccountSidebarOption_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "SubAccountSidebarOption",
+          "columnsFrom": [
+            "sidebarOption"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_SubAccountReference_permissionsId_Permissions_id_fk": {
+          "name": "_SubAccountReference_permissionsId_Permissions_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "Permissions",
+          "columnsFrom": [
+            "permissionsId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_SubAccountReference_funnelId_Funnel_id_fk": {
+          "name": "_SubAccountReference_funnelId_Funnel_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "Funnel",
+          "columnsFrom": [
+            "funnelId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_SubAccountReference_mediaId_Media_id_fk": {
+          "name": "_SubAccountReference_mediaId_Media_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "Media",
+          "columnsFrom": [
+            "mediaId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_SubAccountReference_contactId_Contact_id_fk": {
+          "name": "_SubAccountReference_contactId_Contact_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "Contact",
+          "columnsFrom": [
+            "contactId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_SubAccountReference_triggerId_Trigger_id_fk": {
+          "name": "_SubAccountReference_triggerId_Trigger_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "Trigger",
+          "columnsFrom": [
+            "triggerId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_SubAccountReference_automationId_Automation_id_fk": {
+          "name": "_SubAccountReference_automationId_Automation_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "Automation",
+          "columnsFrom": [
+            "automationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_SubAccountReference_pipelineId_Pipeline_id_fk": {
+          "name": "_SubAccountReference_pipelineId_Pipeline_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "Pipeline",
+          "columnsFrom": [
+            "pipelineId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_SubAccountReference_tagId_Tag_id_fk": {
+          "name": "_SubAccountReference_tagId_Tag_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "Tag",
+          "columnsFrom": [
+            "tagId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_SubAccountReference_notificationId_Notification_id_fk": {
+          "name": "_SubAccountReference_notificationId_Notification_id_fk",
+          "tableFrom": "_SubAccountReference",
+          "tableTo": "Notification",
+          "columnsFrom": [
+            "notificationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "_TagReference": {
+      "name": "_TagReference",
+      "schema": "",
+      "columns": {
+        "tagId": {
+          "name": "tagId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ticketId": {
+          "name": "ticketId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_TagReference_tagId_Tag_id_fk": {
+          "name": "_TagReference_tagId_Tag_id_fk",
+          "tableFrom": "_TagReference",
+          "tableTo": "Tag",
+          "columnsFrom": [
+            "tagId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_TagReference_ticketId_Ticket_id_fk": {
+          "name": "_TagReference_ticketId_Ticket_id_fk",
+          "tableFrom": "_TagReference",
+          "tableTo": "Ticket",
+          "columnsFrom": [
+            "ticketId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "_TagReference_tagId_ticketId_pk": {
+          "name": "_TagReference_tagId_ticketId_pk",
+          "columns": [
+            "tagId",
+            "ticketId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "_TicketReference": {
+      "name": "_TicketReference",
+      "schema": "",
+      "columns": {
+        "ticketId": {
+          "name": "ticketId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tagId": {
+          "name": "tagId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_TicketReference_ticketId_Ticket_id_fk": {
+          "name": "_TicketReference_ticketId_Ticket_id_fk",
+          "tableFrom": "_TicketReference",
+          "tableTo": "Ticket",
+          "columnsFrom": [
+            "ticketId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_TicketReference_tagId_Tag_id_fk": {
+          "name": "_TicketReference_tagId_Tag_id_fk",
+          "tableFrom": "_TicketReference",
+          "tableTo": "Tag",
+          "columnsFrom": [
+            "tagId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "_TicketReference_ticketId_tagId_pk": {
+          "name": "_TicketReference_ticketId_tagId_pk",
+          "columns": [
+            "ticketId",
+            "tagId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "_TriggerReference": {
+      "name": "_TriggerReference",
+      "schema": "",
+      "columns": {
+        "triggerId": {
+          "name": "triggerId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "automationId": {
+          "name": "automationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_TriggerReference_triggerId_Trigger_id_fk": {
+          "name": "_TriggerReference_triggerId_Trigger_id_fk",
+          "tableFrom": "_TriggerReference",
+          "tableTo": "Trigger",
+          "columnsFrom": [
+            "triggerId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_TriggerReference_automationId_Automation_id_fk": {
+          "name": "_TriggerReference_automationId_Automation_id_fk",
+          "tableFrom": "_TriggerReference",
+          "tableTo": "Automation",
+          "columnsFrom": [
+            "automationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "_TriggerReference_triggerId_automationId_pk": {
+          "name": "_TriggerReference_triggerId_automationId_pk",
+          "columns": [
+            "triggerId",
+            "automationId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "_UserReference": {
+      "name": "_UserReference",
+      "schema": "",
+      "columns": {
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "permissionId": {
+          "name": "permissionId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ticketId": {
+          "name": "ticketId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "notificationId": {
+          "name": "notificationId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "_UserReference_userId_User_id_fk": {
+          "name": "_UserReference_userId_User_id_fk",
+          "tableFrom": "_UserReference",
+          "tableTo": "User",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_UserReference_permissionId_Permissions_id_fk": {
+          "name": "_UserReference_permissionId_Permissions_id_fk",
+          "tableFrom": "_UserReference",
+          "tableTo": "Permissions",
+          "columnsFrom": [
+            "permissionId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_UserReference_ticketId_Ticket_id_fk": {
+          "name": "_UserReference_ticketId_Ticket_id_fk",
+          "tableFrom": "_UserReference",
+          "tableTo": "Ticket",
+          "columnsFrom": [
+            "ticketId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_UserReference_notificationId_Notification_id_fk": {
+          "name": "_UserReference_notificationId_Notification_id_fk",
+          "tableFrom": "_UserReference",
+          "tableTo": "Notification",
+          "columnsFrom": [
+            "notificationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "_UserReference_userId_permissionId_ticketId_notificationId_pk": {
+          "name": "_UserReference_userId_permissionId_ticketId_notificationId_pk",
+          "columns": [
+            "userId",
+            "permissionId",
+            "ticketId",
+            "notificationId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {
+    "ActionType": {
+      "name": "ActionType",
+      "values": {
+        "CREATE_CONTACT": "CREATE_CONTACT"
+      }
+    },
+    "Icon": {
+      "name": "Icon",
+      "values": {
+        "settings": "settings",
+        "chart": "chart",
+        "calendar": "calendar",
+        "check": "check",
+        "chip": "chip",
+        "compass": "compass",
+        "database": "database",
+        "flag": "flag",
+        "home": "home",
+        "info": "info",
+        "link": "link",
+        "lock": "lock",
+        "messages": "messages",
+        "notification": "notification",
+        "payment": "payment",
+        "power": "power",
+        "receipt": "receipt",
+        "shield": "shield",
+        "star": "star",
+        "tune": "tune",
+        "videorecorder": "videorecorder",
+        "wallet": "wallet",
+        " warning": " warning",
+        "headphone": "headphone",
+        "send": "send",
+        "pipelines": "pipelines",
+        "person": "person",
+        "category": "category",
+        "contact": "contact",
+        "clipboardIcon": "clipboardIcon"
+      }
+    },
+    "InvitationStatus": {
+      "name": "InvitationStatus",
+      "values": {
+        "Accepted": "Accepted",
+        "Revoked": "Revoked",
+        "Pending": "Pending"
+      }
+    },
+    "Plan": {
+      "name": "Plan",
+      "values": {
+        "price_1": "price_1",
+        "price_2": "price_2"
+      }
+    },
+    "Role": {
+      "name": "Role",
+      "values": {
+        "Agency_Owner": "Agency_Owner",
+        "Agency_Admin": "Agency_Admin",
+        "Subaccount_User": "Subaccount_User",
+        "Subaccount_Guest": "Subaccount_Guest"
+      }
+    },
+    "TriggerTypes": {
+      "name": "TriggerTypes",
+      "values": {
+        "CONTACT_FORM": "CONTACT_FORM"
+      }
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
